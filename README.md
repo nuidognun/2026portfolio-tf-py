@@ -13,4 +13,4 @@
 │   ├── sqs.tf           # Amazon SQS（ディレイキュー・多重通知防止）の設定
 │   └── variables.tf     # 環境に依存する固有情報の変数定義
 └── lambda/
-    ├── lambda_function.py # 画像一括アップロード多重通知制御プログラム（本体）
+    ├── lambda_function.py # HTML自動更新
