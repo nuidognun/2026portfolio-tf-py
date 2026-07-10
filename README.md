@@ -1,7 +1,7 @@
 # 2026portfolio-tf-py
 
 本リポジトリは、ポートフォリオサイトのTerraformファイル、およびLambdaのpythonファイルを掲載しています。
-
+```text
 ├── terraform/
 │   ├── acm.tf           # SSL/TLS証明書（HTTPS化）の設定
 │   ├── cloudfront.tf    # CloudFront（OAC構成・配信キャッシュ）の設定
