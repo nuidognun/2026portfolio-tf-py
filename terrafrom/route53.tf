@@ -9,7 +9,7 @@ resource "aws_route53_record" "apex_a" {
   zone_id         = data.aws_route53_zone.main.zone_id
   name            = var.domain_name
   type            = "A"
-  allow_overwrite = true # ★この行を追加して、手動の古いレコードを上書きできるようにします！
+  allow_overwrite = true # 手動の古いレコードを上書きできるように設定
 
   # CloudFrontを宛先にするための「エイリアス（Alias）」設定
   alias {

@@ -6,7 +6,7 @@ import boto3
 s3_client = boto3.client('s3')
 sns_client = boto3.client('sns')
 cloudfront_client = boto3.client('cloudfront')
-sqs_client = boto3.client('sqs') # ★SQSクライアントを追加
+sqs_client = boto3.client('sqs')
 
 BUCKET_NAME = os.environ.get('BUCKET_NAME')
 TEMPLATE_KEY = os.environ.get('TEMPLATE_KEY') 
@@ -97,7 +97,7 @@ def lambda_handler(event, context):
         except Exception as cf_err:
             print(f"CloudFrontキャッシュ削除スキップ: {str(cf_err)}")
         
-        # ★【ここを修正】SQSキューの中にまだ処理待ちのメッセージがあるか確認する
+        # SQSキューの中にまだ処理待ちのメッセージがあるか確認する
         should_send_email = True
         if 'Records' in event and len(event['Records']) > 0:
             try:

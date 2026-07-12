@@ -1,6 +1,6 @@
-# 1. SSL/TLS 証明書のリクエスト（必ず us-east-1 で作成）
+# 1. SSL/TLS 証明書のリクエスト（us-east-1 で作成）
 resource "aws_acm_certificate" "cert" {
-  provider          = aws.us-east # ★ポイント：providers.tfで定義したus-east-1を使用
+  provider          = aws.us-east # providers.tfで定義したus-east-1を使用
   domain_name       = var.domain_name
   validation_method = "DNS"
 
@@ -29,7 +29,7 @@ resource "aws_route53_record" "cert_validation" {
 
 # 3. 証明書の検証完了を待つ設定
 resource "aws_acm_certificate_validation" "cert" {
-  provider                = aws.us-east # ★ここもus-east-1を指定
+  provider                = aws.us-east
   certificate_arn         = aws_acm_certificate.cert.arn
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }

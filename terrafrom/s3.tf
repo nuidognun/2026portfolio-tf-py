@@ -22,7 +22,7 @@ resource "aws_s3_bucket_public_access_block" "web_bucket" {
   restrict_public_buckets = true
 }
 
-# CloudFrontからのアクセスを許可するポリシー（後でcloudfront.tfと紐付けます）
+# CloudFrontからのアクセスを許可するポリシー（後でcloudfront.tfと紐付ける）
 resource "aws_s3_bucket_policy" "web_bucket" {
   bucket = aws_s3_bucket.web_bucket.id
   policy = data.aws_iam_policy_document.s3_policy.json
@@ -41,18 +41,18 @@ data "aws_iam_policy_document" "s3_policy" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = [aws_cloudfront_distribution.s3_distribution.arn] # 後でcloudfront.tfができると繋がります
+      values   = [aws_cloudfront_distribution.s3_distribution.arn] # 後でcloudfront.tfができると繋がる
     }
   }
-} # ★ここで data ブロックが正しく閉じられます
+}
 
 # sqs.tfを実行後に反映（dataの外側に独立させます）
 resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = aws_s3_bucket.web_bucket.id
 
   queue {
-    queue_arn     = aws_sqs_queue.image_delay_queue.arn # sqs.tfができると繋がります
-    filter_prefix = "images/"                           # 例：images/ フォルダ内を対象にする場合
+    queue_arn     = aws_sqs_queue.image_delay_queue.arn # sqs.tfができると繋がる
+    filter_prefix = "images/"
     events        = [
       "s3:ObjectCreated:*",
       "s3:ObjectRemoved:*"

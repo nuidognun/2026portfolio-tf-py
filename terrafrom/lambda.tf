@@ -112,6 +112,6 @@ resource "aws_lambda_event_source_mapping" "sqs_trigger" {
   enabled          = true
   batch_size       = 10
 
-  # ★【追加】メッセージが届いてから最大5分間（300秒）Lambdaの起動を待って、イベントを限界まで集約する
+  # メッセージが届いてから最大5分間（300秒）Lambdaの起動を待機
   maximum_batching_window_in_seconds = 300
 }

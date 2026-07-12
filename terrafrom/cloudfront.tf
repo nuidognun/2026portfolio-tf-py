@@ -1,4 +1,4 @@
-# 1. CloudFrontがS3にアクセスするためのアクセス制御設定（OAC）
+# CloudFrontがS3にアクセスするためのアクセス制御設定（OAC）
 resource "aws_cloudfront_origin_access_control" "s3_oac" {
   name                              = "s3-portfolio-oac"
   description                       = "OAC for portfolio S3 bucket"
@@ -7,7 +7,7 @@ resource "aws_cloudfront_origin_access_control" "s3_oac" {
   signing_protocol                  = "sigv4"
 }
 
-# 2. CloudFront ディストリビューション本体の設定
+# CloudFront ディストリビューション本体の設定
 resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -47,7 +47,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
-  # SSL証明書の設定（acm.tf で作る証明書を紐付け）
+  # SSL証明書の設定（acm.tf で作る証明書を紐付ける）
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate.cert.arn
     ssl_support_method       = "sni-only"
